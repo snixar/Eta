@@ -46,6 +46,21 @@ class EntrySurfaceGuardTest {
     }
 
     @Test
+    fun lenovoXiaoTianGuardUsesTheLenovoAssistantPackage() {
+        val guard = EntrySurfaceGuard.from(
+            handoff = handoff(source = "lenovo_xiaotian", dismiss = true),
+            logger = NoOpLogger,
+        )
+
+        assertNotNull(guard)
+        assertEquals("com.lenovo.menu_assistant.hd", guard?.targetPackageName)
+        assertEquals(
+            setOf("com.lenovo.menu_assistant.hd"),
+            guard?.consumeScreenshotExcludedPackages(),
+        )
+    }
+
+    @Test
     fun unknownEntryStillCreatesDismissGuardWithoutGuessingAPackage() {
         val guard = EntrySurfaceGuard.from(
             handoff = handoff(source = "future_entry", dismiss = true),

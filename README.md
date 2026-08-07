@@ -15,7 +15,7 @@ Eta 更想做的，是让手机原本藏在界面背后的能力真正向模型�
 而当相册、通知、日程、便签、录音、位置和健康摘要，乃至微信、QQ 的近期聊天图片、外卖订单与配送动态，在你的允许下与长期记忆一起成为上下文，Eta 也不只是在完成命令。它可以逐渐知道你在意什么、理解事情的前因后果，在需要时帮上忙，在想聊聊时记得你是谁——既是能干的助手，也可以成为更懂你的朋友。亲近不意味着失去边界：每种能力都有独立开关和执行范围，敏感原始结果不会写入持久会话；你选择模型，也决定它能看见什么、能做什么，以及什么时候停下来。
 
 > [!NOTE]
-> Eta 支持 ColorOS 与 HyperOS，覆盖 OPPO 系（OPPO / 一加 / 真我）和小米系设备。App 本体是核心工作台并承载完整 Agent Runtime；小布与小爱只作为系统入口接入，共用 BYOK 自定义模型配置。完整功能需要 Root 和 LSPosed。
+> Eta 当前支持 ColorOS、HyperOS，并开始适配 Lenovo ZUXOS；覆盖 OPPO 系（OPPO / 一加 / 真我）、小米系和联想设备。App 本体是核心工作台并承载完整 Agent Runtime；小布、小爱与联想天禧智能体作为系统入口接入，共用 BYOK 自定义模型配置。完整功能需要 Root 和 LSPosed。
 
 ## 界面预览
 
@@ -150,10 +150,11 @@ BYOK（Bring Your Own Key）意味着 Agent 能力跟随你选择的模型，而
 
 ### 系统助手接入
 
-系统助手接入覆盖 ColorOS 小布，并提供 HyperOS 超级小爱适配。两者均由基于 [libxposed API 102](https://github.com/libxposed/api) 的 Xposed 模块实现；在这条链路中，Xposed 只承担入口适配，实际任务仍由 Eta 的 Agent Runtime 执行。
+系统助手接入覆盖 ColorOS 小布、HyperOS 超级小爱，并提供 Lenovo ZUXOS 联想天禧智能体的文本入口适配。各入口均由基于 [libxposed API 102](https://github.com/libxposed/api) 的 Xposed 模块实现；在这条链路中，Xposed 只承担入口适配，实际任务仍由 Eta 的 Agent Runtime 执行。
 
 - **小布接管**：接管小布对话入口，继承当前房间的文本上下文并解析图片输入，交给同一套 Agent Runtime 处理。支持 BYOK，默认只在 `/agent` 前缀下触发
 - **超级小爱接管**：从终态 ASR 与 `setQueryInfo` 识别当前问话，再按查询文本关联小爱重新生成的 `Nlp.Request` Event ID；支持文本与单张本地图片或截图，并会阻止已接管轮次抢跑的原生 Agent Action。前缀、图片解析或任务入队任一前置检查失败时回到原生链路
+- **联想天禧智能体接管**：适配 `com.lenovo.menu_assistant.hd` `3.5.3.03111`（versionCode `3545`）的 `AiChatActivity` 文本入口，读取 `query` extra 后交给共享 Runtime，并使用 Eta 自有浮层展示结果；当前只覆盖文本，不接管联想原生语音识别和图片链路
 
 ### Google 能力解锁与入口创建
 

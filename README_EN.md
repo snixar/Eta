@@ -155,10 +155,11 @@ BYOK—Bring Your Own Key—means the agent follows the capabilities and policie
 
 The Xposed layer is an adapter around system entry points. It recognizes and hands requests to the Eta app process; model calls, database access, terminal execution, and long-running work remain inside the shared Agent Runtime.
 
-### ColorOS and HyperOS assistants
+### ColorOS, HyperOS, and Lenovo ZUXOS assistants
 
 - **Breeno / Xiaobu on ColorOS:** Eta can take over the conversation entry point, inherit the current conversation's text context, parse image input, and send the request to the shared Runtime. BYOK is supported, and only requests beginning with `/agent` are claimed by default.
 - **Super XiaoAI on HyperOS:** Eta correlates final ASR and `setQueryInfo` input with XiaoAI's regenerated `Nlp.Request` event, supports text plus one local image or screenshot, and suppresses native agent actions only for a successfully claimed turn. If a required prefix, image parsing, or queueing check fails, control returns to the native flow.
+- **Lenovo Tianxi Agent on ZUXOS:** Eta supports the text entry in `com.lenovo.menu_assistant.hd` `3.5.3.03111` (versionCode `3545`) by reading the `query` extra from `AiChatActivity` and handing it to the shared Runtime. The first adapter is text-only and leaves Lenovo Tianxi's native voice-recognition and image paths untouched.
 
 The Super XiaoAI adapter has been tested on version `7.13.32.0016` (`507013032`) on a physical device. These hooks depend on specific ROM and app implementations and may need adjustment after major updates.
 

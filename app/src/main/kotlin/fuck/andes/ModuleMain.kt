@@ -14,6 +14,7 @@ import fuck.andes.hook.breeno.BreenoHooks
 import fuck.andes.hook.colordirect.ColorDirectHooks
 import fuck.andes.hook.google.GoogleAppHooks
 import fuck.andes.hook.google.GoogleEligibilityHooks
+import fuck.andes.hook.lenovo.LenovoXiaoTianHooks
 import fuck.andes.hook.system.SystemServerHooks
 import fuck.andes.hook.system.SystemUiHooks
 import fuck.andes.hook.xiaoai.XiaoAiHooks
@@ -95,6 +96,14 @@ class ModuleMain : XposedModule() {
                     )
                 }
             }
+
+            ModuleConfig.LENOVO_XIAOTIAN_PACKAGE -> {
+                if (isCurrentPackageProcess(ModuleConfig.LENOVO_XIAOTIAN_PACKAGE)) {
+                    recordInstallation(
+                        LenovoXiaoTianHooks.install(this, logger, param.classLoader)
+                    )
+                }
+            }
         }
     }
 
@@ -116,7 +125,8 @@ class ModuleMain : XposedModule() {
             isPackageProcess(processName, ModuleConfig.COLOR_DIRECT_PACKAGE) ||
             isPackageProcess(processName, ModuleConfig.BREENO_PACKAGE) ||
             processName == ModuleConfig.XIAOAI_PACKAGE ||
-            processName == ModuleConfig.XIAOAI_CORE_PROCESS
+            processName == ModuleConfig.XIAOAI_CORE_PROCESS ||
+            isPackageProcess(processName, ModuleConfig.LENOVO_XIAOTIAN_PACKAGE)
     }
 
     private fun isCurrentXiaoAiProcess(): Boolean {

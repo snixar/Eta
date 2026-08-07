@@ -7,8 +7,17 @@ internal object ModuleConfig {
     const val GOOGLE_PACKAGE = "com.google.android.googlequicksearchbox"
     const val BREENO_PACKAGE = "com.heytap.speechassist"
     const val XIAOAI_PACKAGE = "com.miui.voiceassist"
+    const val LENOVO_XIAOTIAN_PACKAGE = "com.lenovo.menu_assistant.hd"
+    const val LENOVO_XIAOTIAN_VERSION_CODE = 3545L
+    const val LENOVO_XIAOTIAN_ACTIVITY_CLASS =
+        "com.lenovo.menu_assistant.activity.AiChatActivity"
+    const val LENOVO_XIAOTIAN_QUERY_EXTRA = "query"
     const val XIAOAI_CORE_PROCESS = "$XIAOAI_PACKAGE:core"
-    val AGENT_RUNTIME_ENTRY_PACKAGES = setOf(BREENO_PACKAGE, XIAOAI_PACKAGE)
+    val AGENT_RUNTIME_ENTRY_PACKAGES = setOf(
+        BREENO_PACKAGE,
+        XIAOAI_PACKAGE,
+        LENOVO_XIAOTIAN_PACKAGE,
+    )
     const val GOOGLE_ASSISTANT_COMPONENT =
         "com.google.android.googlequicksearchbox/com.google.android.voiceinteraction.GsaVoiceInteractionService"
     const val ASSISTANT_ROLE = "android.app.role.ASSISTANT"
