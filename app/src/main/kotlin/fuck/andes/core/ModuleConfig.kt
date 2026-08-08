@@ -12,6 +12,9 @@ internal object ModuleConfig {
     const val LENOVO_XIAOTIAN_ACTIVITY_CLASS =
         "com.lenovo.menu_assistant.activity.AiChatActivity"
     const val LENOVO_XIAOTIAN_QUERY_EXTRA = "query"
+    const val LENOVO_XIAOTIAN_BIZ_CLASS =
+        "com.lenovo.menu_assistant.biz.with.WithAIBiz"
+    const val LENOVO_XIAOTIAN_QUERY_TO_NLU_METHOD = "queryToNlu"
     const val XIAOAI_CORE_PROCESS = "$XIAOAI_PACKAGE:core"
     val AGENT_RUNTIME_ENTRY_PACKAGES = setOf(
         BREENO_PACKAGE,

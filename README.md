@@ -154,7 +154,7 @@ BYOK（Bring Your Own Key）意味着 Agent 能力跟随你选择的模型，而
 
 - **小布接管**：接管小布对话入口，继承当前房间的文本上下文并解析图片输入，交给同一套 Agent Runtime 处理。支持 BYOK，默认只在 `/agent` 前缀下触发
 - **超级小爱接管**：从终态 ASR 与 `setQueryInfo` 识别当前问话，再按查询文本关联小爱重新生成的 `Nlp.Request` Event ID；支持文本与单张本地图片或截图，并会阻止已接管轮次抢跑的原生 Agent Action。前缀、图片解析或任务入队任一前置检查失败时回到原生链路
-- **联想天禧智能体接管**：适配 `com.lenovo.menu_assistant.hd` `3.5.3.03111`（versionCode `3545`）的 `AiChatActivity` 文本入口，读取 `query` extra 后交给共享 Runtime，并使用 Eta 自有浮层展示结果；当前只覆盖文本，不接管联想原生语音识别和图片链路
+- **联想天禧智能体接管**：适配 `com.lenovo.menu_assistant.hd` `3.5.3.03111`（versionCode `3545`）。文本入口读取 `AiChatActivity` 的 `query` extra；语音链路接管 `WithAIBiz.queryToNlu` 内部文本入口，识别结果直接交给共享 Runtime，并使用 Eta 自有浮层展示结果；图片链路暂不接管
 
 ### Google 能力解锁与入口创建
 
