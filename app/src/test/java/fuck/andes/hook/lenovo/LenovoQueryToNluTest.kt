@@ -89,16 +89,17 @@ class LenovoQueryToNluTest {
     fun extractsPromptFromArgumentOne() {
         assertEquals(
             "今天天气怎么样",
-            LenovoXiaoTianQueryToNlu.extractPrompt(arrayOf(Any(), " 今天天气怎么样 ", "ctx")),
+            LenovoXiaoTianQueryToNlu.extractPrompt(listOf(Any(), " 今天天气怎么样 ", "ctx")),
         )
     }
 
     @Test
     fun returnsNullForBlankOrWrongTypes() {
-        assertNull(LenovoXiaoTianQueryToNlu.extractPrompt(arrayOf(Any(), "   ", "ctx")))
-        assertNull(LenovoXiaoTianQueryToNlu.extractPrompt(arrayOf(Any(), "", "ctx")))
-        assertNull(LenovoXiaoTianQueryToNlu.extractPrompt(arrayOf(Any(), 42, "ctx")))
-        assertNull(LenovoXiaoTianQueryToNlu.extractPrompt(emptyArray()))
-        assertNull(LenovoXiaoTianQueryToNlu.extractPrompt(arrayOf(Any())))
+        assertNull(LenovoXiaoTianQueryToNlu.extractPrompt(listOf(Any(), "   ", "ctx")))
+        assertNull(LenovoXiaoTianQueryToNlu.extractPrompt(listOf(Any(), "", "ctx")))
+        assertNull(LenovoXiaoTianQueryToNlu.extractPrompt(listOf(Any(), 42, "ctx")))
+        assertNull(LenovoXiaoTianQueryToNlu.extractPrompt(emptyList()))
+        assertNull(LenovoXiaoTianQueryToNlu.extractPrompt(listOf(Any())))
+        assertNull(LenovoXiaoTianQueryToNlu.extractPrompt(null))
     }
 }

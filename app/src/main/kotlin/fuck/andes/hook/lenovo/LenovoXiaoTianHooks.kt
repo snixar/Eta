@@ -43,8 +43,8 @@ internal object LenovoXiaoTianQueryToNlu {
             parameterTypes[4] == Boolean::class.javaPrimitiveType
     }
 
-    fun extractPrompt(args: Array<out Any?>): String? =
-        (args.getOrNull(PROMPT_ARG_INDEX) as? String)
+    fun extractPrompt(args: List<Any?>?): String? =
+        (args?.getOrNull(PROMPT_ARG_INDEX) as? String)
             ?.trim()
             ?.takeIf(String::isNotBlank)
 }
